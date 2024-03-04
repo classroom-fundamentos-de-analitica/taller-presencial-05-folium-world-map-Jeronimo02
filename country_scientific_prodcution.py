@@ -3,6 +3,7 @@
 import pandas as pd
 import folium
 
+
 def load_affiliations():
     """Carga el archivo scopus-papers.csv y retorna un dataframe con la columna 'Affiliations'"""
     dataframe = pd.read_csv(
@@ -11,7 +12,7 @@ def load_affiliations():
         index_col=None,
     )[["Affiliations"]]
     return dataframe
-  
+
 
 def remove_na_rows(affiliations):
     """Elimina las filas con valores nulos en la columna 'Affiliations'"""
@@ -20,7 +21,7 @@ def remove_na_rows(affiliations):
     affiliations = affiliations.dropna(subset=["Affiliations"])
 
     return affiliations
-  
+
 
 def add_countries_column(affiliations):
     """Transforma la columna 'Affiliations' a una lista de paises."""
@@ -41,9 +42,10 @@ def add_countries_column(affiliations):
 
 
 def clean_countries(affiliations):
+
     affiliations = affiliations.copy()
     affiliations["countries"] = affiliations["countries"].str.replace(
-        "United States", "Unites States of America"
+        "United States", "United States of America"
     )
     return affiliations
 
